@@ -1,0 +1,55 @@
+import sqlite3
+
+con = sqlite3.connect('banco_de_dados.db')
+cur= con.cursor()
+nome = input('digite seu nome ')
+
+idade= int(input('digite sua idade '))
+cur.execute(f"INSERT INTO pessoas VALUES ('{nome}' , {idade})")
+con.commit()
+con.close()
+
+
+
+
+qi = sqlite3.connect('banco_de_dados.db')
+cursor = qi.cursor()
+cor = input('qual a cor desse animal?')
+
+tamanho = input('digite o tamanho do seu animal ')
+idade1= int(input('digite sua idade '))
+
+cursor.execute(f"INSERT INTO animais VALUES ('{cor}','{tamanho}' , {idade1})")
+qi.commit()
+qi.close()
+
+
+
+import sqlite3
+
+# Conecta ao banco de dados
+conn = sqlite3.connect('banco_de_dados.db')
+cursor = conn.cursor()
+
+# Executa a consulta
+cursor.execute("""
+    SELECT P.idade AS idade_pessoas, A.idade AS idade_animais
+    FROM pessoas AS P, animais AS A
+    WHERE ABS(P.idade - A.idade) = (
+        SELECT MIN(ABS(P2.idade - A2.idade))
+        FROM pessoas AS P2, animais AS A2
+    )
+    ORDER BY P.idade
+""")
+
+# Recupera os resultados
+resultados = cursor.fetchall()
+
+# Imprime os resultados
+for resultado in resultados:
+    print("Idade da Pessoa:", resultado[0])
+    print("Idade do Animal:", resultado[1])
+    print("--------")
+
+# Fecha a conexão com o banco de dados
+conn.close()
