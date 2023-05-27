@@ -1,0 +1,99 @@
+import sqlite3
+
+def exibir_menu():
+    print("Bem-vindo(a) ao Sistema de Cadastro!")
+    print("Por favor, selecione uma das opções abaixo:")
+    print("1. Cadastrar Pessoas")
+    print("2. Cadastrar Animal")
+    print("3. Relatório")
+    print("4. Sair/Exit")
+
+
+def cadastrar():
+    con = sqlite3.connect('banco_de_dados.db')
+    cur = con.cursor()
+    nome = input("Digite o nome da pessoa: ")
+    idade = input("Digite a idade da pessoa: ")
+    email = input("Digite o email da pessoa: ")
+    especie = input("Digite a espécie de animal de preferência da pessoa: ")
+    cor = input("Digite a cor do animal de preferência da pessoa: ")
+    idade_animal = input("Digite a idade do animal de preferência da pessoa: ")
+    particularidade = input("Digite a particularidade do animal de preferência da pessoa: ")
+
+    cur.execute("INSERT INTO pessoas VALUES (?, ?, ?, ?, ?, ?, ?)",
+                (nome, idade, email, especie, cor, idade_animal, particularidade))
+    con.commit()
+    con.close()
+
+    print("Cadastro de pessoas realizado com sucesso!")
+
+
+def cadastrar_animal():
+    abrir = sqlite3.connect('banco_de_dados.db')
+    curr = abrir.cursor()
+
+    especie = input("Digite a espécie do animal: ")
+    cor = input("Digite a cor do animal: ")
+    idade = input("Digite a idade do animal: ")
+    particularidade = input("Digite a particularidade do animal: ")
+    porte = input('Qual é o porte do animal?')
+
+    curr.execute("INSERT INTO animais VALUES (?, ?, ?, ?, ?)",
+                 (especie, idade, cor, porte, particularidade))
+    abrir.commit()
+    abrir.close()
+
+    print("Cadastro de animal realizado com sucesso!")
+
+
+def imprimir_pessoa_animal_similar():
+    con = sqlite3.connect('banco_de_dados.db')
+    cur = con.cursor()
+
+    cur.execute("""
+        SELECT p.nome, a.especie, COUNT(*) AS similaridade
+        FROM pessoas p
+        JOIN animais a ON p.especie = a.especie
+                       AND p.cor = a.cor
+                       AND p.idade = a.idade
+        GROUP BY p.nome, a.especie
+        HAVING COUNT(*) = (
+            SELECT COUNT(*)
+            FROM animais
+            WHERE especie = a.especie
+              AND cor = a.cor
+              AND idade = a.idade
+        )
+        ORDER BY similaridade DESC
+        LIMIT 1
+    """)
+
+    resultado = cur.fetchone()
+    if resultado:
+        pessoa_nome = resultado[0]
+        animal_especie = resultado[1]
+        similaridade = resultado[2]
+        print(f"A pessoa '{pessoa_nome}' tem mais informações parecidas com um animal da espécie '{animal_especie}' (similaridade: {similaridade}).")
+    else:
+        print("Não há pessoas com informações parecidas em animais.")
+
+    con.close()
+
+while True:
+    exibir_menu()
+    opcao = int(input("Digite o número da opção desejada: "))
+
+    if opcao == 1:
+        print("Opção de cadastrar pessoas selecionada")
+        cadastrar()
+    elif opcao == 2:
+        print("Opção de cadastrar animal selecionada")
+        cadastrar_animal()
+    elif opcao == 3:
+        print("Opção de relatório selecionada")
+        imprimir_pessoa_animal_similar()
+    elif opcao == 4:
+        print("Saindo do sistema...")
+        break
+    else:
+        print("Opção inválida. Por favor, escolha uma opção válida.")
