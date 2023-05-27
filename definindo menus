@@ -1,0 +1,40 @@
+import sqlite3
+
+
+def exibir_menu():
+    print("Bem-vindo(a) ao Sistema de Cadastro!")
+    print("Por favor, selecione uma das opções abaixo:")
+    print("1. Cadastrar Pessoas")
+    print("2. Cadastrar Animal")
+    print("3. Relatório")
+    print("4. Sair/Exit")
+
+
+def cadastrar():
+    con = sqlite3.connect('banco_de_dados.db')
+    cur= con.cursor()
+    nome = input("Digite o nome da pessoa: ")
+    idade = input("Digite a idade da pessoa: ")
+    email = input("Digite o email da pessoa: ")
+    especie_preferencia = input("Digite a espécie de animal de preferência da pessoa: ")
+    cor_animal_preferencia = input("Digite a cor do animal de preferência da pessoa: ")
+    idade_animal_preferencia = input("Digite a idade do animal de preferência da pessoa: ")
+    particularidade_animal_preferencia = input("Digite a particularidade do animal de preferência da pessoa: ")
+
+
+    cur.execute(f"INSERT INTO pessoas VALUES ('{nome}' , {idade}, '{email}' , '{especie_preferencia}' , '{cor_animal_preferencia}', {idade_animal_preferencia} , '{particularidade_animal_preferencia}')")
+    con.commit()
+    con.close()
+    
+
+    # Implemente a lógica para cadastrar as informações da pessoa aqui
+    print("Cadastro de pessoas realizado com sucesso!")
+
+def cadastrar_animal():
+    especie = input("Digite a espécie do animal: ")
+    cor = input("Digite a cor do animal: ")
+    idade = input("Digite a idade do animal: ")
+    particularidade = input("Digite a particularidade do animal: ")
+
+    # Implemente a lógica para cadastrar as informações do animal aqui
+    print("Cadastro de animal realizado com sucesso!")
