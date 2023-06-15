@@ -7,9 +7,39 @@ class Cadastro_pessoas:
 
     def cadastro(self):
         try:
-            nome = input("Digite o nome da pessoa: ")
-            idade = input("Digite a idade da pessoa: ")
-            email = input("Digite o email da pessoa: ")
+
+            while True:
+                    nome = input("Digite o seu nome : ")
+                    print('\n')
+                    if not nome.replace(" ", "").isalpha(): 
+                        print("Nome inválido. Digite apenas letras.")
+                        print("\n")
+                    else:
+                        break
+                    
+                    
+            while True:
+                    try:
+                        cpf = int(input("Digite o seu cpf: (apanas numero!) "))
+                        print('\n')
+                        break
+                    except ValueError:
+                        print("Idade inválida. Digite um número inteiro.")
+                        print('\n')
+
+
+
+            while True:
+                    try:
+                        idade = int(input("Digite a sua idade : "))
+                        print('\n')
+                        break
+                    except ValueError:
+                        print("Idade inválida. Digite um número inteiro.")
+                        print('\n')
+            
+            email = input("Digite o seu email : ")
+
 
             animais_disponiveis = [
                 "Cachorro",
@@ -27,7 +57,7 @@ class Cadastro_pessoas:
             for i, animal in enumerate(animais_disponiveis, start=1):
                 print(f"{i}. {animal}")
 
-            escolha_animal = input("Digite o número do animal de preferência da pessoa: ")
+            escolha_animal = input("Digite o número do animal de sua preferência: ")
             escolha_animal = int(escolha_animal)
 
             if escolha_animal < 1 or escolha_animal > len(animais_disponiveis):
@@ -36,14 +66,29 @@ class Cadastro_pessoas:
 
             animal_escolhido = animais_disponiveis[escolha_animal - 1]
 
-            cor = input("Digite a cor do animal de preferência da pessoa: ")
-            idade_animal = input("Digite a idade do animal de preferência da pessoa: ")
-            particularidade = input("Digite a particularidade do animal de preferência da pessoa: ")
+            while True:
+                    cor = input("Digite a cor do animal de sua preferência:  ")
+                    print('\n')
+                    if not cor.replace(" ", "").isalpha(): 
+                        print("cor inválida. Digite apenas letras.")
+                        print("\n")
+                    else:
+                        break
 
-            self.cur.execute("INSERT INTO pessoas VALUES (?, ?, ?, ?, ?, ?, ?)",
-                            (nome, idade, email, animal_escolhido, cor, idade_animal, particularidade))
+            idade_animal = input("Digite a idade do animal de sua preferência  ")
+
+
+            particularidade = input("Digite a particularidade do animal de sua preferência ou s/n para nenhuma particlaridade: ")
+
+            self.cur.execute("INSERT INTO pessoas VALUES (?, ?, ?, ?, ?, ?, ?,?)",
+                            (nome, idade, email, animal_escolhido, cor, idade_animal, particularidade,cpf))
             self.con.commit()
             self.con.close()
             print("Cadastro de pessoas realizado com sucesso!")
         except sqlite3.Error as e:
             print(f"Ocorreu um erro ao cadastrar a pessoa: {str(e)}")
+
+
+
+
+   

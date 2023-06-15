@@ -18,11 +18,11 @@ class CadastroAnimais:
             
         ]
 
-        border_horizontal = "═" * 34  # Caractere utilizado para formar a linha horizontal
-        print("╔" + border_horizontal + "╗")  # Canto superior esquerdo da caixa
+        border_horizontal = "═" * 34  
+        print("╔" + border_horizontal + "╗")  
         for i, animal in enumerate(animais, start=1):
-            print("║ " + f"{i}. {animal:<30}" + "║")  # Conteúdo da caixa alinhado à esquerda
-        print("╚" + border_horizontal + "╝")  # Canto inferior esquerdo da caixa
+            print("║ " + f"{i}. {animal:<30}" + "║")  
+        print("╚" + border_horizontal + "╝")  
     def cadastrar_animal(self):
         while True:
         # Exibindo a lista de animais disponíveis
@@ -53,28 +53,40 @@ class CadastroAnimais:
                 while True:
                     try:
                         idade = int(input("Digite a idade do animal: "))
+                        print('\n')
                         break
                     except ValueError:
                         print("Idade inválida. Digite um número inteiro.")
+                        print('\n')
 
                 while True:
                     cor = input("Digite a cor desejada para o animal: ")
+                    print('\n')
                     if not cor.isalpha():
                         print("Cor inválida. Digite apenas letras.")
+                        print('\n')
                     else:
                         break
 
                 while True:
-                    porte = input("Digite o porte do animal: ")
-                    if not porte.isalpha():
-                        print("Porte inválido. Digite apenas letras.")
+                    porte = input("Digite o porte do animal (1 para pequeno, 2 para médio, 3 para grande): ")
+                    print('\n')
+                    if porte not in ['1', '2', '3']:
+                        print("Porte inválido. Digite apenas 1 para pequeno, 2 para médio ou 3 para grande.")
+                        print('\n')
                     else:
+                        if porte == '1':
+                            porte = 'pequeno'
+                        elif porte == '2':
+                            porte = 'médio'
+                        else:
+                            porte = 'grande'
                         break
 
                 while True:
-                    particularidade = input("Digite alguma particularidade do animal: ")
-                    if not particularidade.isalpha():
-                        print("Particularidade inválida. Digite apenas letras.")
+                    particularidade = input("Digite alguma particularidade do animal ou s/n para nenhuma : ")
+                    if not particularidade.strip():
+                        print("Este campo não pode ficar vazio!")
                     else:
                         break
 

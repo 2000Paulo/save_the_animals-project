@@ -1,6 +1,6 @@
 import sqlite3
 import random
-from main import *
+
 class Relatorio:
     def __init__(self):
         self.con = sqlite3.connect('banco_de_dados.db')
@@ -39,15 +39,15 @@ class Relatorio:
                     print(f"Particularidade: {particularidade}")
                     print("------------------------------")
             else:
-                print("Não foram encontrados animais compatíveis com o perfil da pessoa.")
+                print(f"Não foram encontrados animais compatíveis com o perfil do(a) {nome}.")
             print("\n")
 
-    def pesquisar_pessoa(self, nome_pessoa):
+    def pesquisar_pessoa(self, cpf_pessoa):
         self.cur.execute("""
             SELECT nome, especie, cor, idade_animal
             FROM pessoas
-            WHERE nome = ?
-        """, (nome_pessoa,))
+            WHERE cpf = ?
+        """, (cpf_pessoa,))
 
         pessoa = self.cur.fetchone()
 
@@ -66,9 +66,9 @@ class Relatorio:
             print("------------------------------")
             print("Animais compatíveis:")
             if animais_compativeis:
-                for animal in animais_compativeis:
+                for numero, animal in enumerate(animais_compativeis, start=1):
                     id_animal, especie, idade_animal, cor, porte, particularidade = animal
-                    print(f"Número: {id_animal}")
+                    print(f"Número: {numero}")
                     print(f"Espécie: {especie}")
                     print(f"Idade: {idade_animal}")
                     print(f"Cor: {cor}")
@@ -76,19 +76,35 @@ class Relatorio:
                     print(f"Particularidade: {particularidade}")
                     print("------------------------------")
             else:
-                print("Não foram encontrados animais compatíveis com o perfil da pessoa.")
+                print(f"Não foram encontrados animais compatíveis com o perfil da pessoa.")
+            print("\n")
         else:
             print("Pessoa não encontrada.")
 
-    def adotar_animal(self, especie_animal):
-        id_animal = random.randint(1000, 9999)  # Gera um ID de 4 dígitos aleatório
-
+    def adotar_animal(self, id_animal, nome_pessoa):
         self.cur.execute("""
             DELETE FROM animais
             WHERE id = ?
         """, (id_animal,))
 
         self.con.commit()
+        print(f"Parabéns, {nome_pessoa}! Você acaba de adotar um animal.")
+        print("\n")
+
+    def listar_animais(self):
+        self.cur.execute("SELECT * FROM animais")
+        animais = self.cur.fetchall()
+
+        for animal in animais:
+            especie, idade_animal, cor, porte, particularidade, id_animal, descricao = animal
+            print("Espécie:", especie)
+            print("Idade do Animal:", idade_animal)
+            print("Cor:", cor)
+            print("Porte:", porte)
+            print("Particularidade:", particularidade)
+            print("ID:", id_animal)
+            print("Descrição:", descricao)
+            print("---------------------------")
 
     def fechar_conexao(self):
-       self.con.close()
+        self.con.close()

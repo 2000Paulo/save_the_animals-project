@@ -30,17 +30,29 @@ def exibir_menu():
                 cadastro_animal = CadastroAnimais()
                 cadastro_animal.cadastrar_animal()
             elif escolha == 3:
-                print('Digite 1 para o relatório geral e 2 para pesquisar por nome:')
+                print('Digite 1 para o relatório geral e 2 para pesquisar por cpf:')
                 pes = int(input(''))
                 if pes == 1:
                     relatorio = Relatorio()
                     relatorio.gerar_relatorio()
                 elif pes == 2:
-                    nome_p = input('Digite o nome da pessoa: ')
+                    nome_p = input('Digite o cpf da pessoa: ')
                     relatorio = Relatorio()
-                    relatorio.pesquisar_pessoa(nome_p)
-                    dig = int(input('Digite o número do animal que você deseja adotar: '))
-                    relatorio.adotar_animal(dig)
+                    if not relatorio.pesquisar_pessoa(nome_p):
+                        print('Nenhum animal compatível encontrado. Voltando para o menu.')
+                        continue
+                    adotar = input('Deseja adotar um animal? (S/N): ')
+                    if adotar.upper() == 'S':
+                        dig = int(input('Digite o número do animal que você deseja adotar: '))
+                        relatorio.adotar_animal(dig, nome_p)
+                    elif adotar.upper() == 'N':
+                        continue
+                    else:
+                        print('Opção inválida. Voltando para o menu.')
+                        continue
+                elif pes == 3:
+                    relatorio = Relatorio()
+                    relatorio.listar_animais()
             elif escolha == 4:
                 break
             else:
@@ -48,8 +60,7 @@ def exibir_menu():
         else:
             print('Opção inválida. Tente novamente.')
 
-        print()  # Linha em branco para separar as iterações do menu
-
+        print()
 
 if __name__ == "__main__":
     exibir_menu()
