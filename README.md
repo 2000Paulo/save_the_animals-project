@@ -53,3 +53,61 @@ Relatório da Pessoa Pesquisada por CPF: Se essa opção for escolhida, o fluxog
 **Ao digitar a opção 3:**<br>
 
 Relatório de Todos os Animais Cadastrados: Se essa opção for selecionada, o fluxograma prosseguirá para a exibição de um relatório completo com informações de todos os animais cadastrados, como espécie, idade, cor e outros detalhes relevantes.
+
+*******************
+
+# Explicação do Código
+### Para facilitar a Compreensão do código Explicaremos por partes...
+*******************
+#### 1 - Código de conexão e cadastro em um banco de dados SQLite:
+
+- Nesse código, você importa o módulo sqlite3 para trabalhar com o banco de dados SQLite.
+- Há duas partes distintas no código: a primeira parte realiza o cadastro de pessoas e a segunda parte realiza o cadastro de animais.
+- Na primeira parte, você se conecta ao banco de dados utilizando sqlite3.connect('banco_de_dados.db').
+- Em seguida, obtém o nome e a idade da pessoa através de entradas do usuário.
+- Utilizando a função cur.execute(), você executa uma instrução SQL para inserir os dados da pessoa na tabela pessoas.
+- Após o cadastro das pessoas, você fecha a conexão com o banco de dados.
+- A segunda parte do código segue uma lógica semelhante para o cadastro de animais, onde são solicitadas informações sobre a cor, tamanho e idade do animal.
+- Novamente, é utilizada a função cur.execute() para inserir os dados do animal na tabela animais.
+- Por fim, você fecha a conexão com o banco de dados novamente.
+
+#### 2 - Código de exibição de menu e cadastro de pessoas e animais:
+
+- Nesse código, você define a função exibir_menu() que exibe um menu para o usuário com opções numéricas.
+- A função utiliza um loop while True para manter o menu sendo exibido até que o usuário escolha a opção de sair.
+- Dentro do loop, você verifica a escolha do usuário através da função isdigit() para garantir que seja um valor numérico.
+- Dependendo da escolha do usuário, você chama as respectivas funções para cadastrar pessoas, cadastrar animais ou gerar um relatório.
+- Para cadastrar pessoas, você instancia a classe Cadastro_pessoas e chama o método cadastro().
+- Para cadastrar animais, você instancia a classe CadastroAnimais e chama o método cadastrar_animal().
+- Para gerar um relatório, você exibe uma mensagem solicitando ao usuário que escolha entre um relatório geral ou uma pesquisa por nome.
+- Com base na escolha do usuário, você instancia a classe Relatorio e chama os métodos gerar_relatorio() ou pesquisar_pessoa().
+
+#### 3 - Código da classe Cadastro_pessoas:
+
+- Nessa classe, você define o método __init__() que estabelece a conexão com o banco de dados no momento da criação do objeto.
+- O método cadastro() é responsável por solicitar ao usuário as informações necessárias para cadastrar uma pessoa.
+- As informações são obtidas através de entradas do usuário, como nome, idade, email, espécie de animal de preferência, cor do animal de preferência, idade do animal de preferência e particularidade do animal de preferência.
+- Utilizando a função cur.execute(), você executa uma instrução SQL para inserir os dados da pessoa na tabela pessoas.
+- Por fim, a conexão com o banco de dados é fechada.
+
+#### 4 - Código da classe CadastroAnimais:
+
+- Essa classe contém o método cadastrar_animal() que solicita ao usuário as informações necessárias para cadastrar um animal.
+- Assim como no código anterior, as informações são obtidas através de entradas do usuário, como espécie, cor, idade e porte do animal.
+- Utilizando a função cur.execute(), você executa uma instrução SQL para inserir os dados do animal na tabela animais.
+- Por fim, a conexão com o banco de dados é fechada.
+
+#### 5 - Código da classe Relatorio:
+
+- Essa classe é responsável por gerar relatórios, pesquisar pessoas e adotar animais.
+- O método __init__() estabelece a conexão com o banco de dados no momento da criação do objeto.
+- O método gerar_relatorio() executa uma consulta SQL para buscar todas as pessoas cadastradas e seus respectivos animais de preferência.
+- Para cada pessoa encontrada, é realizada outra consulta SQL para buscar animais compatíveis no banco de dados.
+- Se houver animais compatíveis, suas informações são exibidas. Caso contrário, é exibida uma mensagem informando que não foram encontrados animais compatíveis.
+- O método pesquisar_pessoa(nome_pessoa) busca uma pessoa específica pelo nome e exibe informações sobre a pessoa e os animais compatíveis.
+- O método adotar_animal(especie_animal) remove um animal do banco de dados com base no número de identificação.
+- O método fechar_conexao() fecha a conexão com o banco de dados.
+
+#### 6 - Código de inicialização do menu:
+
+- Esse trecho de código chama a função exibir_menu() para iniciar o programa e exibir o menu principal.
