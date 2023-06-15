@@ -36,20 +36,26 @@ def exibir_menu():
                     relatorio = Relatorio()
                     relatorio.gerar_relatorio()
                 elif pes == 2:
-                    nome_p = input('Digite o cpf da pessoa: ')
+                    nome_p = input('Digite o CPF da pessoa: ')
                     relatorio = Relatorio()
                     if not relatorio.pesquisar_pessoa(nome_p):
                         print('Nenhum animal compatível encontrado. Voltando para o menu.')
                         continue
                     adotar = input('Deseja adotar um animal? (S/N): ')
                     if adotar.upper() == 'S':
-                        dig = int(input('Digite o número do animal que você deseja adotar: '))
+                        dig = int(input('Digite o id do animal que você deseja adotar: '))
                         relatorio.adotar_animal(dig, nome_p)
                     elif adotar.upper() == 'N':
                         continue
                     else:
                         print('Opção inválida. Voltando para o menu.')
                         continue
+                elif pes == 3:
+                    relatorio = Relatorio()
+                    relatorio.listar_animais()
+
+
+                        
                 elif pes == 3:
                     relatorio = Relatorio()
                     relatorio.listar_animais()
