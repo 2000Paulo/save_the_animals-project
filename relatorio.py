@@ -32,6 +32,7 @@ class Relatorio:
                 for animal in animais_compativeis:
                     id_animal, especie, idade_animal, cor, porte, particularidade = animal
                     print(f"Número: {id_animal}")
+                    print(f"id do animal:{id_animal}")
                     print(f"Espécie: {especie}")
                     print(f"Idade: {idade_animal}")
                     print(f"Cor: {cor}")
@@ -69,17 +70,22 @@ class Relatorio:
                 for numero, animal in enumerate(animais_compativeis, start=1):
                     id_animal, especie, idade_animal, cor, porte, particularidade = animal
                     print(f"Número: {numero}")
+                    print(f"id do animal: {id_animal}")
                     print(f"Espécie: {especie}")
                     print(f"Idade: {idade_animal}")
                     print(f"Cor: {cor}")
                     print(f"Porte: {porte}")
                     print(f"Particularidade: {particularidade}")
                     print("------------------------------")
+                return True  # Retorna True se houver animais compatíveis
             else:
                 print(f"Não foram encontrados animais compatíveis com o perfil da pessoa.")
+                return False  # Retorna False se não houver animais compatíveis
             print("\n")
         else:
             print("Pessoa não encontrada.")
+            return False  # Retorna False se a pessoa não for encontrada
+
 
     def adotar_animal(self, id_animal, nome_pessoa):
         self.cur.execute("""
