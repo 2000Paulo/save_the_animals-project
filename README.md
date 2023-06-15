@@ -14,14 +14,14 @@
 # Fluxograma do Projeto
 
 
-![image](https://github.com/2000Paulo/save_the_animals-project/assets/109771351/050f824f-270e-4395-a673-598c8b784c3a)
+![img1](https://github.com/2000Paulo/save_the_animals-project/assets/109771351/ca4bbd72-dc47-482a-916c-666d2b2eee28)
 
 Interface do Programa (Menu): Essa é a tela inicial do programa, onde o usuário terá diferentes opções para escolher.<br><br>O menu apresenta as seguintes opções:<br><br>
 Cadastro de Animal: Ao selecionar essa opção, o fluxograma seguirá para a tela de cadastro dos animais.<br><br>
 Cadastro de Candidato: Ao escolher essa opção, o fluxograma avançará para o processo de cadastro de candidatos interessados em adotar um animal.
 Exibir Relatório: Se essa opção for selecionada, o fluxograma prosseguirá para a exibição de diferentes tipos de relatórios.
 
-![image](https://github.com/2000Paulo/save_the_animals-project/assets/109771351/3c8ab04a-61b9-412f-9377-ffb50ee1d95b)
+![img2](https://github.com/2000Paulo/save_the_animals-project/assets/109771351/b9bf8f19-6d47-4c84-9c8f-e9450751264c)
 
 Tela de Cadastro dos Animais: Nessa etapa, o usuário preencherá os dados relacionados ao animal que está sendo cadastrado.<br><br> 
 Os dados solicitados podem incluir informações como a espécie do animal. Após fornecer essas informações, o fluxograma prossegue para o próximo passo.<br><br>
@@ -29,14 +29,14 @@ Inserir Dados Restantes do Animal: Nessa parte, o usuário será solicitado a in
 Após preencher todos os dados, o fluxograma segue para o Dados no Banco de Dados, Nessa etapa, os dados referentes à geração do cadastro de animais serão salvos no banco de dados para futuras referências.
 Logo após o  programa volta para o menu principal.
 
-![image](https://github.com/2000Paulo/save_the_animals-project/assets/109771351/2de03210-f2f7-436e-99b2-18cbd60ce6c9)
+![img3](https://github.com/2000Paulo/save_the_animals-project/assets/109771351/2b7cacd6-0cd0-471b-bf1e-d9af73728dad)
 <br><br>
 Cadastro de Candidato: Essa parte do fluxograma representa o processo de cadastro de pessoas interessadas em adotar um animal. O usuário será solicitado a inserir seus dados pessoais, como nome, CPF e e-mail. Além disso, será necessário inserir a espécie de interesse
 e outras características do animal desejado.<br> Após preencher todas as informações, o fluxograma avança para o Dados no Banco de Dados, Nessa etapa, os dados referentes à geração do cadastro de candidatos para a adoção serão salvos no banco de dados para futuras referências.
 
 ### Logo após o  programa volta para o menu principal.
 
-![image](https://github.com/2000Paulo/save_the_animals-project/assets/109771351/c7f3184f-ea77-4524-a179-dd63e82606d1)
+![img4](https://github.com/2000Paulo/save_the_animals-project/assets/109771351/12bc3938-5dfb-4aa5-9a72-1a4f7623f66d)
 
 **Opção de Relatório:**<br>
 
